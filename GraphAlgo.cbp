@@ -32,7 +32,13 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="graphFsAps.cpp" />
+		<Unit filename="graphFsAps.h" />
+		<Unit filename="graphMatriceAdjacence.cpp" />
+		<Unit filename="graphMatriceAdjacence.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="noeud.cpp" />
+		<Unit filename="noeud.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
