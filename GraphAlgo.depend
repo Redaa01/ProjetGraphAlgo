@@ -1,0 +1,41 @@
+# depslib dependency file v1.0
+1713955467 source:c:\users\mathi\desktop\projet\projetgraphalgo\distance.cpp
+	"distance.h"
+
+1713990396 c:\users\mathi\desktop\projet\projetgraphalgo\distance.h
+	<vector>
+	<iostream>
+
+1713971607 source:c:\users\mathi\desktop\projet\projetgraphalgo\graph.cpp
+	"graph.h"
+	<vector>
+
+1713971607 c:\users\mathi\desktop\projet\projetgraphalgo\graph.h
+	<vector>
+
+1713971632 source:c:\users\mathi\desktop\projet\projetgraphalgo\main.cpp
+	<iostream>
+	"distance.h"
+	<vector>
+	"application.h"
+
+1711899405 source:c:\users\mathi\desktop\projet\projetgraphalgo\noeud.cpp
+	"noeud.h"
+
+1711899366 c:\users\mathi\desktop\projet\projetgraphalgo\noeud.h
+	<iostream>
+
+1713960752 source:c:\users\mathi\desktop\projet\projetgraphalgo\dijkstra.cpp
+	"dijkstra.h"
+
+1713970810 c:\users\mathi\desktop\projet\projetgraphalgo\dijkstra.h
+	<vector>
+
+1713990960 source:c:\users\mathi\desktop\projet\projetgraphalgo\application.cpp
+	"application.h"
+
+1713971765 c:\users\mathi\desktop\projet\projetgraphalgo\application.h
+	<vector>
+	<iostream>
+	<graph.h>
+
