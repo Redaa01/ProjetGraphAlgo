@@ -34,7 +34,6 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-<<<<<<< HEAD
 		<Unit filename="application.cpp" />
 		<Unit filename="application.h" />
 		<Unit filename="dijkstra.cpp" />
@@ -43,12 +42,6 @@
 		<Unit filename="distance.h" />
 		<Unit filename="graph.cpp" />
 		<Unit filename="graph.h" />
-=======
-		<Unit filename="graphFsAps.cpp" />
-		<Unit filename="graphFsAps.h" />
-		<Unit filename="graphMatriceAdjacence.cpp" />
-		<Unit filename="graphMatriceAdjacence.h" />
->>>>>>> 40aa752b67399b4c82b7ffdaf56f5d036486f601
 		<Unit filename="main.cpp" />
 		<Unit filename="noeud.cpp" />
 		<Unit filename="noeud.h" />

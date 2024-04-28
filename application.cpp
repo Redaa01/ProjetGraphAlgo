@@ -225,5 +225,143 @@ void application::algorithmes()
         cout<<"9. Decodage de Prufer\n";
         cin>>choix;
     }
+    switch(choix)
+    {
+    case 0:
+    {
+        break;
+    }
+    case 1 :
+    {
+        vector<vector<int>> mat_dist;
+        if(verifieDistance())
+        {
+             mat_dist = englobe_Distance();
+             string s = "";
+             for(unsigned i = 0 ; i < mat_dist.size() ; ++i)
+             {
+                 s += toStringVector(mat_dist[i]) + "\n";
+             }
+             cout<<"Resultat de l'algorithme des distances :"<<s<<endl;
+        }
+        break;
+    }
+}
+}
 
+string application::toStringVector(const vector<int>& tab)
+{
+
+    string s = "[ ";
+    for(unsigned i = 0 ; i < tab.size() ; ++i)
+    {
+        s += std::to_string(tab[i]) + ", ";
+    }
+    s += "]";
+    return s;
+}
+
+
+bool application::verifieDistance()
+{
+    //Il faut que fs et aps soit initialisé ou la matrice ET que le graphe soit oriente.
+    if(d_graphe.getEst_oriente())
+    {
+        if(d_graphe.isUsingFsAndAps())
+        {
+            if(verifieFS_APS_NonVide())
+                return true;
+            else
+            {
+                std::cout<<"ERREUR DISTANCE: FS et APS vide !"<<endl;
+                return false;
+            }
+        }
+        else if(verifieMatrice_NonVide())
+        {
+            return true;
+        }
+        else
+        {
+            std::cout<<"ERREUR DISTANCE: Matrice vide !"<<endl;
+            return false;
+        }
+    }
+    else
+    {
+        std::cout<<"ERREUR DISTANCE: Graphe non oriente !"<<endl;
+        return false;
+    }
+}
+
+vector<vector<int>> application::englobe_Distance()
+{
+    vector<vector<int>> matriceDistance;
+    if(!d_graphe.isUsingFsAndAps())
+    {
+        transformeVersFS_APS();
+    }
+    distance d;
+    d.mat_distance(d_graphe.getFS(),d_graphe.getAPS(),matriceDistance);
+    return matriceDistance;
+}
+
+void application::transformeVersMatrice()
+{
+    vector<vector<int>> matrice ;
+    d_graphe.FS_APS_to_MatAdj(matrice);
+
+    for(unsigned i = 1 ; i < matrice.size() ; ++i)
+        printVector(matrice[i]);
+
+    d_graphe = Graph(matrice, d_graphe.getSommets(), d_graphe.getEst_oriente(), d_graphe.getA_Des_Poids());
+}
+
+void application::transformeVersFS_APS()
+{
+    vector<int> fs, aps;
+    d_graphe.matAdj_to_FS_APS(fs,aps);
+
+    d_graphe = Graph(fs, aps, d_graphe.getSommets(), d_graphe.getEst_oriente(), d_graphe.getA_Des_Poids());
+}
+
+bool application::verifieFS_APS_NonVide()
+{
+    if(d_graphe.getFS().empty() || d_graphe.getAPS().empty())
+    {
+        return false;
+    }
+    return true;
+}
+
+bool application::verifieMatrice_NonVide()
+{
+    vector<vector<int>> mat = d_graphe.getMatAdj();
+    if(mat.empty())
+        return false;
+    else if(mat[0].size() != 2)
+    {
+        return false;
+    }
+    else
+    {
+        unsigned size = mat[1].size();
+        for(unsigned i = 2 ; i < mat.size() ; ++i)
+        {
+            if(mat[i].size() != size)
+                return false;
+        }
+        return true;
+    }
+}
+
+void application::printVector(const vector<int>& v)
+{
+    unsigned i = 0;
+    cout << "[";
+    for(i = 0; i < v.size() - 1; ++i)
+    {
+        cout << v[i] << ", ";
+    }
+    cout << v[i] << "]\n";
 }

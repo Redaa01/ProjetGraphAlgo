@@ -5,6 +5,18 @@ distance::distance()
 
 }
 
+void distance::mat_distance(const vector<int>& FS, const vector<int>& APS, vector<vector<int>>& matriceDistance)
+{
+    int n = APS[0];
+    matriceDistance.resize(n+1);
+    matriceDistance[0].resize(2);
+    for(int r = 1 ; r <= n ; r++)
+    {
+        descente_largeur(r,FS,APS,matriceDistance[r]);
+    }
+    matriceDistance[0][0] = n;
+}
+
 void distance::descente_largeur(int r,const vector<int>& fs, const vector<int>& aps, vector<int>& dist)
 {
     int nb_sommets = aps[0];
@@ -55,7 +67,7 @@ void distance::edit(const vector<int> dist)
 {
     for(int i = 1; i <= dist[0]; i++)
     {
-        std::cout<<dist[i]<<" - ";
+        cout<<dist[i]<<" - ";
     }
 }
 

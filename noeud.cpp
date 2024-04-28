@@ -1,30 +1,56 @@
 #include "noeud.h"
 
-noeud::noeud(int id) : d_id{id}, d_info{}
+Noeud::Noeud(int id) : d_id{id}, d_info{}
 {}
 
-noeud::noeud(int id, const string& info) : d_id{id}, d_info{info}
+Noeud::Noeud(int id, const string& info) : d_id{id}, d_info{info}
 {}
 
-noeud::noeud(const noeud& n) : d_id{n.d_id}, d_info{n.d_info}
+Noeud::Noeud(const Noeud& n) : d_id{n.d_id}, d_info{n.d_info}
 {}
 
-int noeud::getId() const
+int Noeud::getId() const
 {
     return d_id;
 }
 
-string noeud::getInfo() const
+string Noeud::getInfo() const
 {
     return d_info;
 }
 
-void noeud::setId(int id)
+void Noeud::setId(int id)
 {
     d_id = id;
 }
 
-void noeud::setInfo(const string& info)
+void Noeud::setInfo(const string& info)
 {
     d_info = info;
+}
+
+Noeud& Noeud::operator=(const Noeud& n)
+{
+    if(this == &n) return *this;
+
+    d_id = n.d_id;
+    d_info = n.d_info;
+
+    return *this;
+}
+
+void Noeud::print(std::ostream& os) const
+{
+    os << toString();
+}
+
+string Noeud::toString() const
+{
+    return "Noeud{id=" + std::to_string(d_id) + ", info=\"" + d_info + "\"}";
+}
+
+std::ostream& operator<<(std::ostream& os, const Noeud& n)
+{
+    n.print(os);
+    return os;
 }

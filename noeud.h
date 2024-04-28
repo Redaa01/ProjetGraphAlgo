@@ -2,23 +2,32 @@
 #define NOEUD_H
 
 #include <iostream>
-using namespace::std;
+#include <string>
+#include <vector>
 
-class noeud
+using std::string;
+using std::vector;
+
+class Noeud
 {
-    public:
-        noeud(int id);
-        noeud(int id, const string& info);
-        noeud(const noeud& n);
+public:
+    Noeud(int id);
+    Noeud(int id, const string& info);
+    Noeud(const Noeud& n);
+    int getId() const;
+    string getInfo() const;
+    void setId(int id);
+    void setInfo(const string& info);
 
-        int getId() const; //permet de récupérer l'id du noeud
-        string getInfo() const; //permet de récupérer l'info du noeud
+    Noeud& operator=(const Noeud& n);
 
-        void setId(int id); //permet d'inseret un id du noeud
-        void setInfo(const string& info); //permet d'insérer une info du noeud
-    private:
-        int d_id;
-        string d_info;
+    void print(std::ostream& os) const;
+    string toString() const;
+private:
+    int d_id;
+    string d_info;
 };
+
+std::ostream& operator<<(std::ostream& os, const Noeud& n);
 
 #endif // NOEUD_H
