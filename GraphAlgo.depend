@@ -67,11 +67,12 @@
 	<vector>
 	"application.h"
 
-1714401825 c:\users\mathi\desktop\projet final\projetgraphalgo\application.h
+1714404093 c:\users\mathi\desktop\projet final\projetgraphalgo\application.h
 	<vector>
 	"Graph.h"
 	"distance.h"
 	"dijkstra.h"
+	"prufer.h"
 	<iostream>
 
 1714333156 source:c:\users\mathi\desktop\projet final\projetgraphalgo\noeud.cpp
@@ -82,6 +83,12 @@
 	<string>
 	<vector>
 
-1714401939 source:c:\users\mathi\desktop\projet final\projetgraphalgo\application.cpp
+1714404106 source:c:\users\mathi\desktop\projet final\projetgraphalgo\application.cpp
 	"application.h"
+
+1714403184 source:c:\users\mathi\desktop\projet final\projetgraphalgo\prufer.cpp
+	"prufer.h"
+
+1714403209 c:\users\mathi\desktop\projet final\projetgraphalgo\prufer.h
+	<vector>
 

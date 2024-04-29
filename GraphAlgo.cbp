@@ -14,6 +14,7 @@
 				<Compiler>
 					<Add option="-g" />
 					<Add directory="C:/Users/mathi/Desktop/Projet/ProjetGraphAlgo" />
+					<Add directory="C:/Users/mathi/Desktop/Projet Final/ProjetGraphAlgo" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -24,6 +25,7 @@
 				<Compiler>
 					<Add option="-O2" />
 					<Add directory="C:/Users/mathi/Desktop/Projet/ProjetGraphAlgo" />
+					<Add directory="C:/Users/mathi/Desktop/Projet Final/ProjetGraphAlgo" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -45,6 +47,8 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="noeud.cpp" />
 		<Unit filename="noeud.h" />
+		<Unit filename="prufer.cpp" />
+		<Unit filename="prufer.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

@@ -274,6 +274,45 @@ void application::algorithmes()
         }
         break;
     }
+     case 8:
+    {
+        if(verifiePruferEncode())
+        {
+            vector<int> p = englobe_Prufer_encode();
+            string s;
+            s += toStringVector(p);
+            cout<<"Resultat du codage de Prufer :\n"<<s<<endl;
+        }
+        break;
+    }
+    case 9:
+    {
+        cout<<"Veuillez saisir le tableau P "<<endl;
+        vector<int> p;
+        int nb;
+        cout<<"Nombre de sommets presents dans P ?"<<endl;
+        int taille;
+        cin>>taille;
+        p.push_back(taille);
+        for(int i = 1 ; i <= taille ; ++i)
+        {
+            cout<<"Saisir la cellule "<<i<<endl;
+            cin>>nb;
+            p.push_back(nb);
+        }
+        if(verifiePruferDecode(p))
+        {
+            englobe_Prufer_decode(p);
+            string str = "";
+            str += "graphe : \n";
+            for(unsigned i = 0 ; i < d_graphe.getMatAdj().size() ; ++i)
+            {
+                str += toStringVector(d_graphe.getMatAdj()[i]) + "\n";
+            }
+            cout<<"Resultat du decodage de Prufer :\n"<<str<<endl;
+        }
+        break;
+    }
     }
 
     menuPrincipal();
@@ -458,6 +497,67 @@ bool application::verifieDijkstra(int sommet_depart)
     }
 }
 
+bool application::verifiePruferEncode()
+{
+    //Il faut que fs et aps soit initialisé ou la matrice ET que le graphe soit non oriente.
+    if(!d_graphe.getEst_oriente())
+    {
+        if(d_graphe.isUsingFsAndAps())
+        {
+            if(verifieFS_APS_NonVide())
+                return true;
+            else
+            {
+                std::cerr<<"ERREUR PRUFER_ENCODE: FS et APS vide !"<<endl;
+                return false;
+            }
+        }
+        else if(verifieMatrice_NonVide())
+        {
+            return true;
+        }
+        else
+        {
+            std::cerr<<"ERREUR PRUFER_ENCODE: Matrice vide !"<<endl;
+            return false;
+        }
+    }
+    else
+    {
+        std::cerr<<"ERREUR PRUFER_ENCODE: Graphe oriente !"<<endl;
+        return false;
+    }
+}
+
+bool application::verifiePruferDecode(const vector<int>& p)
+{
+    unsigned m = p[0];
+    if(m != p.size()-1)
+    {
+        std::cerr<<"ERREUR PRUFER_DECODE: P n'est pas correctement saisi : p[0] contient le nombre total d'elements du tableau"<<endl;
+        return false;
+    }
+    else
+    {
+        int nb_max_sommets = m+2;
+        for(unsigned i = 1 ; i <= m ; ++i)
+        {
+            cout<<"p["<<i<<"] = "<<p[i]<<endl;
+            if(p[i] <= 0 || p[i] > nb_max_sommets)
+            {
+                string s = "P n'est pas correctement saisi : p[";
+                s += std::to_string(i);
+                s += "] est soit negatif soit superieur a ";
+                s += std::to_string(p[0]+2);
+                std::cerr<<"ERREUR PRUFER_DECODE: "<<s<<endl;
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+
 vector<vector<int>> application::englobe_Distance()
 {
     vector<vector<int>> matriceDistance;
@@ -481,6 +581,28 @@ void application::englobe_Dijkstra(int sommet_depart, vector<int>& d, vector<int
     di.faitDijkstra(d_graphe.getFS(),d_graphe.getAPS(),d_graphe.getCouts(),sommet_depart,d,pr);
 }
 
+vector<int> application::englobe_Prufer_encode()
+{
+    vector<int> p;
+    if(d_graphe.isUsingFsAndAps())
+    {
+        transformeVersMatrice();
+    }
+    vector<vector<int>> mat = d_graphe.getMatAdj();
+    prufer pr;
+    pr.Prufer_encode(mat, p);
+    return p;
+}
+
+void application::englobe_Prufer_decode(const vector<int>& p)
+{
+    vector<vector<int>> mat;
+    prufer pr;
+    pr.Prufer_decode(p, mat);
+
+    d_graphe.setMatrice(mat);
+    d_graphe.setOriente(false);
+}
 
 void application::transformeVersMatrice()
 {

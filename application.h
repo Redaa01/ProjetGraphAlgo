@@ -5,6 +5,7 @@
 #include "Graph.h"
 #include "distance.h"
 #include "dijkstra.h"
+#include "prufer.h"
 #include <iostream>
 using std::cout;
 using std::cin;
@@ -25,6 +26,8 @@ class application
 
         bool verifieDistance();
         bool verifieDijkstra(int sommet_depart);
+        bool verifiePruferEncode();
+        bool verifiePruferDecode(const vector<int>& p);
         bool verifieFS_APS_NonVide();
         bool verifieMatrice_NonVide();
 
@@ -34,6 +37,8 @@ class application
 
         vector<vector<int>> englobe_Distance();
         void englobe_Dijkstra(int sommet_depart, vector<int>& d, vector<int>& pr);
+        vector<int> englobe_Prufer_encode();
+        void englobe_Prufer_decode(const vector<int>& p);
     private:
         Graph d_graphe;
 };
