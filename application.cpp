@@ -13,13 +13,15 @@ void application::menuPrincipal()
     cout<<"0. Quitter\n";
     cout<<"1. Charger un graphe.\n";
     cout<<"2. Lancer un algorithme\n";
+    cout<<"3. Voir le graph courant\n";
     cin>>choix;
-    while(choix < 0 || choix > 2)
+    while(choix < 0 || choix > 3)
     {
         cout<<"Erreur, le choix saisi n'existe pas. Veuillez ressaisir votre choix :"<<endl;
         cout<<"0. Quitter";
         cout<<"1. Charger un graphe.\n";
         cout<<"2. Lancer un algorithme\n";
+        cout<<"3. Voir le graph courant\n";
         cin>>choix;
     }
     switch(choix)
@@ -36,6 +38,13 @@ void application::menuPrincipal()
     case 2:
     {
         algorithmes();
+        break;
+    }
+    case 3:
+    {
+        d_graphe.print(cout);
+        cout<<endl;
+        menuPrincipal();
         break;
     }
     default:{break;}
@@ -265,7 +274,9 @@ void application::algorithmes()
         }
         break;
     }
-}
+    }
+
+    menuPrincipal();
 }
 
 string application::toStringVector(const vector<int>& tab)
