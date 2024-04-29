@@ -246,6 +246,25 @@ void application::algorithmes()
         }
         break;
     }
+    case 5:
+    {
+        vector<int> d, pr;
+        int sommet_depart;
+        cout<<"Veuillez renseigner le sommet de depart"<<endl;
+        cin>>sommet_depart;
+        if(verifieDijkstra(sommet_depart))
+        {
+            englobe_Dijkstra(sommet_depart,d,pr);
+            string s = "";
+            s += "Distance : \n";
+            s += toStringVector(d);
+            s += "\n";
+            s += "Pr : ";
+            s += toStringVector(pr);
+            cout<<"Resultat de Dijkstra :"<<s<<endl;
+        }
+        break;
+    }
 }
 }
 
@@ -294,6 +313,140 @@ bool application::verifieDistance()
     }
 }
 
+bool application::verifieDijkstra(int sommet_depart)
+{
+    //Il faut que le graphe soit oriente.
+    //Il faut que fs et aps soit initialisé ou la matrice.
+    //Il faut que le cout soit correct, qu'il ne contienne pas de cout < 0
+    if(d_graphe.getEst_oriente())
+    {
+        if(d_graphe.isUsingFsAndAps())
+        {
+            if(verifieFS_APS_NonVide())
+            {
+                if(sommet_depart <= 0 || sommet_depart > d_graphe.getAPS()[0])
+                {
+                    string str = std::to_string(d_graphe.getAPS()[0]);
+                    string s = "Le sommet saisi n'est pas valide ! Veuillez saisir un sommet compris entre 1 et ";
+                    s += str;
+                    std::cerr<<"ERREUR DIJKSTRA: "<<s<<endl;
+                    return false; //Le sommet saisi n'est pas valide !
+                }
+                else
+                {
+                    if(d_graphe.getA_Des_Poids())
+                    {
+                        vector<vector<int>> couts = d_graphe.getCouts();
+                        if(couts[0][0] != d_graphe.getAPS()[0] || couts[0][1] != (d_graphe.getFS()[0] - d_graphe.getAPS()[0]))
+                        {
+                            std::cerr<<"ERREUR DIJKSTRA: Les elements presents dans le cout en ligne 0 ne correspondent pas avec le fs et aps"<<endl;
+                            return false;//Les elements presents dans le cout ne correspondent pas avec le fs et aps
+                        }
+                        else
+                        {
+                            for(unsigned i = 1 ; i < couts.size() ; ++i)
+                            {
+                                for(unsigned j = 1 ; j < couts[i].size() ; ++j)
+                                {
+                                    if(couts[i][j] < -1)
+                                    {
+                                        string str = std::to_string(i);
+                                        string str2 = std::to_string(j);
+                                        string s = "L'element present dans le cout en ligne ";
+                                        s += str;
+                                        s += " et en colonne ";
+                                        s += str2;
+                                        s += " est negatif ! Veuillez modifier cette valeur en positive pour utiliser Dijkstra.";
+                                        std::cerr<<"ERREUR DIJKSTRA: "<<s<<endl;
+                                        return false;//Cout negatif interdit !
+                                    }
+                                }
+                            }
+                            return true;
+                        }
+                    }
+                    else
+                    {
+                        std::cerr<<"ERREUR DIJKSTRA: Cout vide !"<<endl;
+                        return false; //Cout vide
+                    }
+                }
+            }
+            else
+            {
+                std::cerr<<"ERREUR DIJKSTRA: Fs et APS vide !"<<endl;
+                return false; //Graphe Vide - Fs & Aps
+            }
+        //Matrice
+        }
+        else
+        {
+            if(verifieMatrice_NonVide())
+            {
+                int n = d_graphe.getMatAdj()[0][0];
+                int m = d_graphe.getMatAdj()[0][1];
+                if(sommet_depart <= 0 || sommet_depart > n)
+                {
+                    string str = std::to_string(n);
+                    string s = "Le sommet saisi n'est pas valide ! Veuillez saisir un sommet compris entre 1 et ";
+                    s += str;
+                    std::cerr<<"ERREUR DIJKSTRA: "<<s<<endl;
+                    return false; //Le sommet saisi n'est pas valide !
+                }
+                else
+                {
+                    if(d_graphe.getA_Des_Poids())
+                    {
+                        vector<vector<int>> couts = d_graphe.getCouts();
+                        if(couts[0][0] != n || couts[0][1] != m)
+                        {
+                            std::cerr<<"ERREUR DIJKSTRA: Les elements presents dans le cout en ligne 0 ne correspondent pas avec la matrice"<<endl;
+                            return false;//Les elements presents dans le cout ne correspondent pas avec la matrice
+                        }
+                        else
+                        {
+                            for(unsigned i = 1 ; i < couts.size() ; ++i)
+                            {
+                                for(unsigned j = 1 ; j < couts[i].size() ; ++j)
+                                {
+                                    if(couts[i][j] < 0)
+                                    {
+                                        string str = std::to_string(i);
+                                        string str2 = std::to_string(j);
+                                        string s = "L'element present dans le cout en ligne ";
+                                        s += str;
+                                        s += " et en colonne ";
+                                        s += str2;
+                                        s += " est negatif ! Veuillez modifier cette valeur en positive pour utiliser Dijkstra.";
+                                        std::cerr<<"ERREUR DIJKSTRA: "<<s<<endl;
+                                        return false;//Cout negatif interdit !
+                                    }
+                                }
+                            }
+                            return true;
+                        }
+                    }
+                    else
+                    {
+                        std::cerr<<"ERREUR DIJKSTRA: Cout vide !"<<endl;
+                        return false; //Cout vide
+                    }
+                }
+            }
+            else
+            {
+                std::cerr<<"ERREUR DIJKSTRA: Matrice vide !"<<endl;
+                return false; //Graphe Vide - Matrice
+            }
+        }
+    }
+    else
+    {
+        std::cerr<<"ERREUR DIJKSTRA: Graphe non oriente !"<<endl;
+        return false;
+    }
+}
+
 vector<vector<int>> application::englobe_Distance()
 {
     vector<vector<int>> matriceDistance;
@@ -305,6 +458,18 @@ vector<vector<int>> application::englobe_Distance()
     d.mat_distance(d_graphe.getFS(),d_graphe.getAPS(),matriceDistance);
     return matriceDistance;
 }
+
+void application::englobe_Dijkstra(int sommet_depart, vector<int>& d, vector<int>& pr)
+{
+    cout<<"DIJK";
+    if(!d_graphe.isUsingFsAndAps())
+    {
+        transformeVersFS_APS();
+    }
+    dijkstra di;
+    di.faitDijkstra(d_graphe.getFS(),d_graphe.getAPS(),d_graphe.getCouts(),sommet_depart,d,pr);
+}
+
 
 void application::transformeVersMatrice()
 {

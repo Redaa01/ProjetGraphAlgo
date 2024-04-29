@@ -67,10 +67,11 @@
 	<vector>
 	"application.h"
 
-1714332942 c:\users\mathi\desktop\projet final\projetgraphalgo\application.h
+1714401825 c:\users\mathi\desktop\projet final\projetgraphalgo\application.h
 	<vector>
 	"Graph.h"
 	"distance.h"
+	"dijkstra.h"
 	<iostream>
 
 1714333156 source:c:\users\mathi\desktop\projet final\projetgraphalgo\noeud.cpp
