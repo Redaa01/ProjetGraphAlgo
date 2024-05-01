@@ -11,6 +11,12 @@ using std::stringstream;
 using std::unique_ptr;
 using std::vector;
 
+struct arete {
+    int s; // première extrémité de l'arête
+    int t; // deuxième extrémité de l’arête
+    double p; // poids de l’arête
+};
+
 class Graph
 {
 private:
@@ -28,6 +34,7 @@ private:
     bool verifIntegriteeSommets();
     bool verifIntegriteeSommets_FS_APS();
     bool verifIntegriteeSommets_MatAdj();
+
 
 public:
     Graph(bool est_oriente = true); // couts vide
@@ -69,8 +76,14 @@ public:
     void print(std::ostream& ost) const;
     void saveIn(std::ostream& ost) const;
     string toString() const;
+
     int nbSommets() const;
     int getArc(int pred, int succ);
+    int getNbArc() const;
+
+    int n; // nombre de sommets du graphe
+    int m; //nombre d’arêtes du graphe arete *a;
+    arete *a; // tableau des aretes
 };
 
 // Global functions

@@ -46,6 +46,8 @@
 		<Unit filename="distance.h" />
 		<Unit filename="graph.cpp" />
 		<Unit filename="graph.h" />
+		<Unit filename="kruskal.cpp" />
+		<Unit filename="kruskal.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="noeud.cpp" />
 		<Unit filename="noeud.h" />
