@@ -9,9 +9,9 @@ Ordonnancement::Ordonnancement(const Graph& graph) : d_graph{graph}
 
 void Ordonnancement::AlgoOrdonnancement(vector<int>& dateAuPlusTot, vector<int>& dateAuPlusTard, vector<string>& sommetCritique)
 {
-    int nbS = d_graph.nbSommets();
+    int nbS = d_graph.nbSommets(); //nb sommets du graph
     vector<int> tabRang;
-    //rang(tabRang);
+    //rang(tabRang); //Algo du rang
     tabRang[0]=0;
     int rangMax = *std::max_element(tabRang.begin(), tabRang.end());
     vector<int> numerotation;
