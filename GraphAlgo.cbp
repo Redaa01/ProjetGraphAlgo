@@ -38,6 +38,8 @@
 		</Compiler>
 		<Unit filename="application.cpp" />
 		<Unit filename="application.h" />
+		<Unit filename="dantzig.cpp" />
+		<Unit filename="dantzig.h" />
 		<Unit filename="dijkstra.cpp" />
 		<Unit filename="dijkstra.h" />
 		<Unit filename="distance.cpp" />
@@ -47,6 +49,8 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="noeud.cpp" />
 		<Unit filename="noeud.h" />
+		<Unit filename="ordonnancement.cpp" />
+		<Unit filename="ordonnancement.h" />
 		<Unit filename="prufer.cpp" />
 		<Unit filename="prufer.h" />
 		<Extensions>

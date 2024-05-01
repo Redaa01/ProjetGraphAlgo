@@ -69,6 +69,8 @@ public:
     void print(std::ostream& ost) const;
     void saveIn(std::ostream& ost) const;
     string toString() const;
+    int nbSommets() const;
+    int getArc(int pred, int succ);
 };
 
 // Global functions

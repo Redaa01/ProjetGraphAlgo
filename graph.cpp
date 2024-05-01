@@ -1024,6 +1024,21 @@ string Graph::toString() const
 
     return toPrint;
 }
+
+int Graph::nbSommets() const
+{
+    return APS[0];
+}
+
+int Graph::getArc(int pred, int succ)
+{
+    int i=APS[pred];
+    while(FS[i]!= succ)
+    {
+        ++i;
+    }
+    return couts[i][0]; //FAUX
+}
 // ---------- End of public funtions ----------
 
 
