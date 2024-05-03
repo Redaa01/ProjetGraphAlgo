@@ -51,7 +51,10 @@ class application
         void transformeVersFS_APS();
         void printVector(const vector<int>& v);
         void lireFSAPSDepuisFichier(const string& nomFichier, vector<int>& aps, vector<int>& fs);
+        void lireMatrice(vector<vector<int>>& matriceCout, const string& nomFichier);
+        void ecritureFSAPSdansUnFichier(const string& nomFichier, const vector<int>& fs, const vector<int>& aps);
         void fichier();
+        void sauvegardeFichier();
 
         vector<vector<int>> englobe_Distance();
         vector<int> englobe_Rang();

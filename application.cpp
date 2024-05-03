@@ -14,14 +14,16 @@ void application::menuPrincipal()
     cout<<"1. Charger un graphe.\n";
     cout<<"2. Lancer un algorithme\n";
     cout<<"3. Voir le graph courant\n";
+    cout<<"4. Sauvgarder graphe courant\n";
     cin>>choix;
-    while(choix < 0 || choix > 3)
+    while(choix < 0 || choix > 4)
     {
         cout<<"Erreur, le choix saisi n'existe pas. Veuillez ressaisir votre choix :"<<endl;
         cout<<"0. Quitter";
         cout<<"1. Charger un graphe.\n";
         cout<<"2. Lancer un algorithme\n";
         cout<<"3. Voir le graph courant\n";
+        cout<<"4. Sauvgarder graphe courant\n";
         cin>>choix;
     }
     switch(choix)
@@ -44,6 +46,12 @@ void application::menuPrincipal()
     {
         d_graphe.print(cout);
         cout<<endl;
+        menuPrincipal();
+        break;
+    }
+    case 4:
+    {
+        sauvegardeFichier();
         menuPrincipal();
         break;
     }
@@ -1134,6 +1142,39 @@ void application::lireFSAPSDepuisFichier(const string& nomFichier, vector<int>& 
 
 }
 
+void applicationecritureFSAPSdansUnFichier(const string& nomFichier, const vector<int>& fs, const vector<int>& aps)
+{
+    std::ofstream fichier(nomFichier+".txt");
+    //on peut vérifier si le fichier existe déjà pour ne pas l'écraser
+    if(!fichier.is_open()) {std::cout<<"Le fichier n'a pas pu être ouvert en écriture.";}
+    else
+    {
+        fichier<<"aps={";
+        for(int i=0;i<aps.size()-1;i++)
+        {
+            fichier<<aps[i];
+            fichier<<",";
+
+        }
+        fichier<<aps[aps.size()-1];
+        fichier<<"}"<<std::endl;
+
+        fichier<<"fs={";
+
+        for(int i=0;i<fs.size()-1;i++)
+        {
+            fichier<<fs[i];
+            fichier<<",";
+        }
+        fichier<<fs[fs.size()-1];
+        fichier<<"}";
+
+    }
+
+    fichier.close();
+
+}
+
 void application::fichier()
 {
     cout<<"Entrez le nom du fichier choisi : ";
@@ -1144,4 +1185,12 @@ void application::fichier()
     lireFSAPSDepuisFichier(nomFichier, FS, APS);
     Graph newGraphe{FS, APS};
     d_graphe = newGraphe;
+}
+
+void application::sauvegardeFichier()
+{
+    cout<<"Entrez le nom du fichier choisi : ";
+    string nomFichier;
+    cin>>nomFichier;
+    applicationecritureFSAPSdansUnFichier(nomFichier, d_graphe.getFS(), d_graphe.getAPS());
 }
