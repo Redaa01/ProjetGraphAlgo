@@ -14,11 +14,13 @@ int main()
     std::vector<int> fs = {31, 2, 3, 0, 4, 9, 0, 4, 6, 8, 0, 8, 9, 11, 0, 3, 6, 0, 7, 8, 0, 8, 0, 10, 0, 0, 11, 0, 10, 12, 0, 0};
     Rang rg;
 
-    std::vector<int> r = rg.calculeRang(fs,aps);
+    vector<int> rang;
+
+    rg.calculeRang(rang,fs,aps);
 
 
     for (int i = 1; i <= aps[0]; i++)
-        std::cout << "rang[" << i << "] = " << r[i] << std::endl;
+        std::cout << "rang[" << i << "] = " << rang[i] << std::endl;
 
     return 0;
 }

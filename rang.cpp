@@ -12,9 +12,8 @@ void Rang::empiler(int x, vector<int> &pilch) // avec x dans {1, ... , n}
     pilch[0] = x;
 }
 
-vector<int> Rang::calculeRang(const vector<int>& fs, const vector<int>& aps)
+void Rang::calculeRang(vector<int>& rang, const vector<int>& fs, const vector<int>& aps)
 {
-        vector<int> rang;
         int n = aps[0];
         int s,rangActuel,h,t;
         rang.resize(n+1);
@@ -58,7 +57,6 @@ vector<int> Rang::calculeRang(const vector<int>& fs, const vector<int>& aps)
             }
             s = pilch[0];
             prem[rangActuel+1] = s;
-            return rang;
         }
 }
 
