@@ -45,11 +45,9 @@ public:
     Graph(const vector<int>& FS, const vector<int>& APS, const vector<vector<int>>& couts);
     Graph(const vector<int>& FS, const vector<int>& APS, bool est_oriente);
     Graph(const Graph& g);
-
-
     Graph(const vector<int>& fs, const vector<int>& aps, const vector<unique_ptr<Noeud>>& sommets, bool est_oriente, bool a_des_poids);
-
     Graph(const vector<vector<int>>& matAdj, const vector<unique_ptr<Noeud>>& sommets, bool est_oriente, bool a_des_poids);
+
     Graph& operator=(const Graph& g);
 
     bool getEst_oriente() const;
@@ -70,8 +68,6 @@ public:
 
     void ajouterNoeud(const Noeud& n, const vector<int>& pred, const vector<int>& succ);
     void FS_APS_to_MatAdj(vector<vector<int>>& matAdj) const;
-    static Graph loadGraphFrom(std::istream& ist);
-    bool loadFrom(std::istream& ist); ///@todo - Alex : to be implemented
     void matAdj_to_FS_APS(vector<int>& FS, vector<int>& APS) const;
     void print(std::ostream& ost) const;
     void saveIn(std::ostream& ost) const;

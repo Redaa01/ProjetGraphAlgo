@@ -52,23 +52,23 @@
 	<vector>
 	<iostream>
 
-1714661892 source:c:\users\mathi\desktop\projet final\projetgraphalgo\graph.cpp
+1714773173 source:c:\users\mathi\desktop\projet final\projetgraphalgo\graph.cpp
 	"graph.h"
 
-1714661892 c:\users\mathi\desktop\projet final\projetgraphalgo\graph.h
+1714773179 c:\users\mathi\desktop\projet final\projetgraphalgo\graph.h
 	"noeud.h"
 	<memory>
 	<sstream>
 	<vector>
 
-1714769227 source:c:\users\mathi\desktop\projet final\projetgraphalgo\main.cpp
+1714771191 source:c:\users\mathi\desktop\projet final\projetgraphalgo\main.cpp
 	<iostream>
 	"distance.h"
 	<vector>
 	"application.h"
 	"rang.h"
 
-1714769687 c:\users\mathi\desktop\projet final\projetgraphalgo\application.h
+1714773524 c:\users\mathi\desktop\projet final\projetgraphalgo\application.h
 	"Graph.h"
 	"distance.h"
 	"dijkstra.h"
@@ -80,6 +80,7 @@
 	"tarjan.h"
 	<iostream>
 	<vector>
+	<fstream>
 
 1714333156 source:c:\users\mathi\desktop\projet final\projetgraphalgo\noeud.cpp
 	"noeud.h"
@@ -89,7 +90,7 @@
 	<string>
 	<vector>
 
-1714769196 source:c:\users\mathi\desktop\projet final\projetgraphalgo\application.cpp
+1714772812 source:c:\users\mathi\desktop\projet final\projetgraphalgo\application.cpp
 	"application.h"
 
 1714403184 source:c:\users\mathi\desktop\projet final\projetgraphalgo\prufer.cpp

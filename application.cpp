@@ -57,25 +57,59 @@ void application::load()
     cout<<endl<<"Bienvenue dans le menu de chargement d'un graphe. De quelle maniere voulez-vous le saisir?"<<endl;
     do {
         std::cout<<"> 1. Via FS/APS ?"<<std::endl;
-        std::cout<<"> 2. Via la matrice ?"<<std::endl;
-        std::cout<<"> 3. Via un fichier ?"<<std::endl;
+        std::cout<<"> 2. Via les arcs ? ?"<<std::endl;
+        std::cout<<"> 3. Via la matrice ?"<<std::endl;
+        std::cout<<"> 4. Via un fichier ?"<<std::endl;
         std::cin>>choix;
-    }while(choix < 0 || choix > 3);
+    }while(choix < 0 || choix > 4);
 
     switch(choix)
     {
         case 1: FSandAPS();
                 break;
-        case 2: matrice();
+        case 2: arcs();
                 break;
-        /*case 3: fichier();
-                break;*/ //A FAIRE
+        case 3: matrice();
+                break;
+        case 4: fichier();
+                break;
     }
 
     menuPrincipal();
 }
 
 void application::FSandAPS()
+{
+    vector<int> FS;
+    vector<int> APS;
+    int n, m, nbTab;
+    cout<<"FS[0] ? :";
+    cin>>n;
+
+    FS.push_back(n);
+    for(int i = 1; i <= n; i++)
+    {
+        cout<<"FS["<<i<<"] : ";
+        cin>>nbTab;
+        FS.push_back(nbTab);
+    }
+    cout<<"APS[0] ? :";
+    cin>>m;
+
+    APS.push_back(m);
+    for(int i = 1; i <= m; i++)
+    {
+        cout<<"APS["<<i<<"] : ";
+        cin>>nbTab;
+        APS.push_back(nbTab);
+    }
+
+    Graph newGraphe{FS, APS};
+    d_graphe = newGraphe;
+
+}
+
+void application::arcs()
 {
         int n, m;
         vector<int> APS;
@@ -1059,4 +1093,55 @@ void application::printVector(const vector<int>& v)
         cout << v[i] << ", ";
     }
     cout << v[i] << "]\n";
+}
+
+void application::lireFSAPSDepuisFichier(const string& nomFichier, vector<int>& fs, vector<int>& aps) {
+    std::ifstream fichier(nomFichier+".txt");
+
+    //formatage attendu dans le fichier :
+    //aps={12,1, 4, 7, 11, 15, 18, 21, 23, 25, 26, 28, 31}
+    //fs={31, 2, 3, 0, 4, 9, 0, 4, 6, 8, 0, 8, 9, 11, 0, 3, 6, 0, 7, 8, 0, 8, 0, 10, 0, 0, 11, 0, 10, 12, 0, 0}
+
+    if(fichier.is_open())
+    {
+        char p;
+        int nbSommetAPS;
+        int nbSommetsFS;
+        int valeur;
+        fichier>>p>>p>>p>>p>>p>>nbSommetAPS>>p;
+        aps.resize(nbSommetAPS+1);
+        aps[0] = nbSommetAPS;
+        for(int i = 1;i <= (nbSommetAPS);i++)
+        {
+           fichier>>valeur>>p;
+           aps[i]=valeur;
+        }
+        fichier>>p>>p>>p>>p>>nbSommetsFS>>p;
+        fs.resize(nbSommetsFS);
+        fs[0] = nbSommetsFS;
+        for(int i=1;i<=(nbSommetsFS);i++)
+        {
+           fichier>>valeur>>p;
+           fs[i]=valeur;
+        }
+
+        fichier.close();
+    }
+    else
+    {
+            std::cout<<"L'application n'a pu lire le fichier.";
+    }
+
+}
+
+void application::fichier()
+{
+    cout<<"Entrez le nom du fichier choisi : ";
+    string nomFichier;
+    cin>>nomFichier;
+    vector<int> FS;
+    vector<int> APS;
+    lireFSAPSDepuisFichier(nomFichier, FS, APS);
+    Graph newGraphe{FS, APS};
+    d_graphe = newGraphe;
 }

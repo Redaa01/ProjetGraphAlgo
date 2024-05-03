@@ -13,6 +13,7 @@
 
 #include <iostream>
 #include <vector>
+#include <fstream>
 
 using std::cout;
 using std::cin;
@@ -27,6 +28,7 @@ class application
         void menuPrincipal();
         void load();
         void FSandAPS();
+        void arcs();
         void matrice();
         void algorithmes();
 
@@ -48,6 +50,8 @@ class application
         void transformeVersMatrice();
         void transformeVersFS_APS();
         void printVector(const vector<int>& v);
+        void lireFSAPSDepuisFichier(const string& nomFichier, vector<int>& aps, vector<int>& fs);
+        void fichier();
 
         vector<vector<int>> englobe_Distance();
         vector<int> englobe_Rang();
