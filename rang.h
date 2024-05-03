@@ -1,9 +1,7 @@
 #ifndef RANG_H_INCLUDED
 #define RANG_H_INCLUDED
 
-#include <iostream>
 #include <vector>
-#include <fstream>
 #include <string>
 
 using std::vector;
@@ -11,16 +9,10 @@ using std::vector;
 class Rang
 {
 public :
-    Rang(const vector<int>& aps, const vector<int>& fs);
-    vector<int> calculeRang();
-    int getTailleAps() const;
-    void empiler(int x);
-    void ecrireRangsDansFichier(vector<int> &rang, const std::string &nomFichier);
-    void lireGrapheDepuisFichier(const std::string &nomFichier);
-private :
-    vector<int> d_pilch;
-    vector<int> d_fs;
-    vector<int> d_aps;
+    Rang();
+    void empiler(int x, vector<int> &pilch);
+    vector<int> calculeRang(const vector<int>& fs, const vector<int>& aps);
+    void demi_degre_interieur(const vector<int>& FS, const vector<int>& APS, vector<int> &DDI);
 };
 
 #endif // RANG_H_INCLUDED

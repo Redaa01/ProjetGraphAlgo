@@ -55,6 +55,8 @@
 		<Unit filename="ordonnancement.h" />
 		<Unit filename="prufer.cpp" />
 		<Unit filename="prufer.h" />
+		<Unit filename="rang.cpp" />
+		<Unit filename="rang.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
