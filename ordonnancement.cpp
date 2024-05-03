@@ -1,13 +1,12 @@
 #include "ordonnancement.h"
-//#include "rang.h"
 #include <algorithm>
 
-Ordonnancement::Ordonnancement(const Graph& graph) : d_graph{graph}
+Ordonnancement::Ordonnancement()
 {
 
 }
 
-void Ordonnancement::AlgoOrdonnancement(vector<int>& dateAuPlusTot, vector<int>& dateAuPlusTard, vector<string>& sommetCritique)
+/*void Ordonnancement::AlgoOrdonnancement(vector<int>& dateAuPlusTot, vector<int>& dateAuPlusTard, vector<string>& sommetCritique)
 {
     int nbS = d_graph.nbSommets(); //nb sommets du graph
     vector<int> tabRang;
@@ -136,5 +135,53 @@ vector<int> Ordonnancement::calculDDI() const
             ddi[d_graph.getFS()[k]] ++;
     }
     return ddi;
+}*/
+
+void Ordonnancement::AlgoOrdonnancement(const vector<int> file_pred, const vector<int> adr_prem_pred, const vector<int> duree_taches, vector<int>& file_pred_critique, vector<int>& adr_prem_pred_critique, vector<int>& longueur_critique)
+{
+    int n = adr_prem_pred[0];
+    int m = file_pred[0];
+
+    file_pred_critique.resize(m+1);
+    adr_prem_pred_critique.resize(n+1);
+
+    adr_prem_pred_critique[0] = n;
+
+    longueur_critique.resize(n+1);
+    longueur_critique[0] = n;
+
+    int kc = 1; //Indice de la dernière place remplie dans fpc
+    int t, lg; //la longueur lg de la tâche t
+    longueur_critique[1] = 0;
+    file_pred_critique[1] = 0; //Fin de la liste
+    adr_prem_pred_critique[1] = 1;
+
+    for(int s = 2 ; s <= n ; ++s)
+    {
+        //Calcul de lc[s] en fonction des prédecesseurs critiques de s
+        longueur_critique[s] = 0;
+        adr_prem_pred_critique[s] = kc+1; //Début de la liste des prédecesseurs critiques de s
+        for(int k = adr_prem_pred[s] ; (t = file_pred[k]) != 0 ; ++k)
+        {
+            lg = longueur_critique[t] + duree_taches[t];
+            if(lg >= longueur_critique[s])
+            {
+                if(lg > longueur_critique[s])
+                {
+                    longueur_critique[s] = lg; //Nouvelle lg candidate à être critique
+                    kc = adr_prem_pred_critique[s] ;
+                    file_pred_critique[kc] = t;
+                }
+                else //lg == lc[s]
+                {
+                    ++kc;
+                    file_pred_critique[kc] = t;
+                }
+            }
+        }
+        ++kc;
+        file_pred_critique[kc] = 0; //Fin de la liste des prédecesseurs critiques de s
+    }
+    file_pred_critique[0] = kc;
 }
 

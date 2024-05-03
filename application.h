@@ -7,6 +7,7 @@
 #include "kruskal.h"
 #include "prufer.h"
 #include "dantzig.h"
+#include "ordonnancement.h"
 
 #include <iostream>
 #include <vector>
@@ -28,6 +29,8 @@ class application
         void algorithmes();
 
         string toStringVector(const vector<int>& tab);
+        void transforme_FP_APP_TO_FS_APS(const vector<int>& fp, const vector<int>& app, vector<int>& fs, vector<int>& aps);
+
 
         bool verifieDistance();
         bool verifieDijkstra(int sommet_depart);
@@ -43,6 +46,7 @@ class application
         void printVector(const vector<int>& v);
 
         vector<vector<int>> englobe_Distance();
+        void englobe_Ordonnancement(const vector<int>& duree_taches, const vector<int>& fp, const vector<int>& app, vector<int>& longueur_critique);
         bool englobe_Dantzig();
         void englobe_Dijkstra(int sommet_depart, vector<int>& d, vector<int>& pr);
         void englobe_Kruskal();

@@ -255,6 +255,27 @@ void application::algorithmes()
         }
         break;
     }
+        case 4:
+    {
+            vector<int> long_critique;
+            vector<int> duree, fp, app;
+            vector<string> taches;
+            string tache;
+            cout<<"Veuillez saisir les taches une par une sous la forme Nom_de_la_tache>Duree>Predecesseur_1-Predecesseur_2-... OU '0' si aucun"<<endl;
+            cout<<"Quand la saisie est terminee, saisir -1 : "<<endl;
+            cin>>tache;
+            while(tache[0] != -1)
+            {
+                for(unsigned i = 0 ; i < tache.length() ; ++i)
+                {
+                    //...
+                }
+            }
+            englobe_Ordonnancement(duree,fp,app,long_critique);
+            string s = "";
+            cout<<"Resultat de l'ordonnancement :"<<s<<endl;
+        break;
+    }
     case 5:
     {
         vector<int> d, pr;
@@ -706,6 +727,19 @@ vector<vector<int>> application::englobe_Distance()
     return matriceDistance;
 }
 
+void application::englobe_Ordonnancement(const vector<int>& duree_taches, const vector<int>& fp, const vector<int>& app, vector<int>& longueur_critique)
+{
+    vector<int> new_fs, new_aps;
+    vector<int> file_pred_critique;
+    vector<int> adr_prem_pred_critique;
+
+    Ordonnancement ord;
+    ord.AlgoOrdonnancement(fp, app, duree_taches, file_pred_critique, adr_prem_pred_critique, longueur_critique);
+
+    transforme_FP_APP_TO_FS_APS(file_pred_critique,adr_prem_pred_critique,new_fs,new_aps);
+    d_graphe.setFSandAPS(new_fs,new_aps);
+}
+
 void application::englobe_Dijkstra(int sommet_depart, vector<int>& d, vector<int>& pr)
 {
     cout<<"DIJK";
@@ -818,6 +852,44 @@ bool application::verifieMatrice_NonVide()
         return true;
     }
 }
+
+void application::transforme_FP_APP_TO_FS_APS(const vector<int>& fp, const vector<int>& app, vector<int>& fs, vector<int>& aps)
+{
+    int n = app[0];
+
+    aps.clear();
+    fs.clear();
+
+    aps.reserve(n+1);
+    aps.push_back(n);
+
+    fs.reserve(fp[0]+1);
+    fs.push_back(fp[0]);
+
+    for(int i = 1; i <= n; ++i)
+    {
+        for(int j = 1; j <= fp[0]; ++j)
+        {
+            if(fp[j] == i)
+            {
+                unsigned k = 1;
+                while(k < app.size() and app[k] <= j)
+                {
+                    ++k;
+                }
+                fs.push_back(k-1);
+            }
+        }
+        fs.push_back(0);
+    }
+
+    aps.push_back(1);
+    for(unsigned i = 1; i < fs.size()-1; ++i)
+    {
+        if(fs[i] == 0) aps.push_back(i+1);
+    }
+}
+
 
 void application::printVector(const vector<int>& v)
 {
