@@ -52,28 +52,31 @@
 	<vector>
 	<iostream>
 
-1714333321 source:c:\users\mathi\desktop\projet final\projetgraphalgo\graph.cpp
+1714661892 source:c:\users\mathi\desktop\projet final\projetgraphalgo\graph.cpp
 	"graph.h"
 
-1714402754 c:\users\mathi\desktop\projet final\projetgraphalgo\graph.h
+1714661892 c:\users\mathi\desktop\projet final\projetgraphalgo\graph.h
 	"noeud.h"
 	<memory>
 	<sstream>
 	<vector>
 
-1714330424 source:c:\users\mathi\desktop\projet final\projetgraphalgo\main.cpp
+1714725924 source:c:\users\mathi\desktop\projet final\projetgraphalgo\main.cpp
 	<iostream>
 	"distance.h"
 	<vector>
 	"application.h"
+	"kruskal.h"
 
-1714404093 c:\users\mathi\desktop\projet final\projetgraphalgo\application.h
-	<vector>
+1714727917 c:\users\mathi\desktop\projet final\projetgraphalgo\application.h
 	"Graph.h"
 	"distance.h"
 	"dijkstra.h"
+	"kruskal.h"
 	"prufer.h"
+	"dantzig.h"
 	<iostream>
+	<vector>
 
 1714333156 source:c:\users\mathi\desktop\projet final\projetgraphalgo\noeud.cpp
 	"noeud.h"
@@ -83,7 +86,7 @@
 	<string>
 	<vector>
 
-1714404106 source:c:\users\mathi\desktop\projet final\projetgraphalgo\application.cpp
+1714724572 source:c:\users\mathi\desktop\projet final\projetgraphalgo\application.cpp
 	"application.h"
 
 1714403184 source:c:\users\mathi\desktop\projet final\projetgraphalgo\prufer.cpp
@@ -166,5 +169,28 @@
 	<iostream>
 
 1714532624 c:\users\zk\desktop\projetgraphalgo\kruskal.h
+	"graph.h"
+
+1714726083 source:c:\users\mathi\desktop\projet final\projetgraphalgo\dantzig.cpp
+	"dantzig.h"
+
+1714726274 c:\users\mathi\desktop\projet final\projetgraphalgo\dantzig.h
+	<vector>
+	<iostream>
+
+1714725924 source:c:\users\mathi\desktop\projet final\projetgraphalgo\kruskal.cpp
+	"kruskal.h"
+	<iostream>
+
+1714726303 c:\users\mathi\desktop\projet final\projetgraphalgo\kruskal.h
+	"graph.h"
+
+1714724448 source:c:\users\mathi\desktop\projet final\projetgraphalgo\ordonnancement.cpp
+	"ordonnancement.h"
+	<algorithm>
+
+1714661892 c:\users\mathi\desktop\projet final\projetgraphalgo\ordonnancement.h
+	<vector>
+	<string>
 	"graph.h"
 

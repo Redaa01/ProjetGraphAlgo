@@ -7,7 +7,7 @@ Dantzig::Dantzig()
 
 bool Dantzig::AlgoDantzig(vector<vector<int>>& dist) const
 {
-    int n = dist[0][0]; //n = dist.size()
+    int n = dist[0][0];
     int x;
     for(int k = 0; k < n; ++k)
     {
@@ -23,6 +23,7 @@ bool Dantzig::AlgoDantzig(vector<vector<int>>& dist) const
                 }
             }
             if((dist[i][k+1]+ dist[k+1][i]) < 0){
+                cout<<"Presence d'un circuit absorbant passant par "<<i<<" et "<<k+1<<" ."<<endl;
                 return false;
             }
         }

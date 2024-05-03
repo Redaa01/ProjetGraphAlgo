@@ -2,8 +2,10 @@
 #define DANTZIG_H_INCLUDED
 
 #include <vector>
-
+#include <iostream>
 using std::vector;
+using std::cout;
+using std::endl;
 
 class Dantzig
 {

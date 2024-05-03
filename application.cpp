@@ -274,6 +274,39 @@ void application::algorithmes()
         }
         break;
     }
+        case 6:
+    {
+        if(verifieDantzig())
+        {
+            if(englobe_Dantzig())
+            {
+                string str = "";
+                str += "Nouveau cout : \n";
+                for(unsigned i = 0 ; i < d_graphe.getCouts().size() ; ++i)
+                {
+                    str += toStringVector(d_graphe.getCouts()[i]) + "\n";
+                }
+                cout<<"Resultat de Dantzig :"<<str<<endl;
+            }
+        }
+        break;
+    }
+        case 7:
+    {
+        if(verifieKruskal())
+        {
+            englobe_Kruskal();
+            string s = "";
+            s += "FS : \n";
+            s += toStringVector(d_graphe.getFS());
+            s += "\n";
+            s += "APS : ";
+            s += toStringVector(d_graphe.getAPS());
+            s += "\n";
+            cout<<"Resultat de Kruskal :\n"<<s<<endl;
+        }
+        break;
+    }
      case 8:
     {
         if(verifiePruferEncode())
@@ -497,6 +530,109 @@ bool application::verifieDijkstra(int sommet_depart)
     }
 }
 
+bool application::verifieDantzig()
+{
+    //Il faut que le graphe soit oriente.
+    //Il faut que le cout soit bien initialisé ou la matrice.
+    if(d_graphe.getEst_oriente())
+    {
+        if(d_graphe.isUsingFsAndAps())
+        {
+            if(verifieFS_APS_NonVide())
+            {
+                if(d_graphe.getA_Des_Poids())
+                {
+                    vector<vector<int>> couts = d_graphe.getCouts();
+                    if(couts[0][0] != d_graphe.getAPS()[0] || couts[0][1] != (d_graphe.getFS()[0] - d_graphe.getAPS()[0]))
+                    {
+                        std::cerr<<"ERREUR DANTZIG: Les elements presents dans le cout en ligne 0 ne correspondent pas avec le fs et aps"<<endl;
+                        return false;//Les elements presents dans le cout ne correspondent pas avec le fs et aps
+                    }
+                    return true;
+                }
+                else
+                {
+                    std::cerr<<"ERREUR DANTZIG: Cout vide !"<<endl;
+                    return false; //Cout vide
+                }
+            }
+            else
+            {
+                std::cerr<<"ERREUR DANTZIG: FS et APS vide !"<<endl;
+                return false; //Graphe Vide - Fs & Aps
+            }
+        }
+        else
+        {
+           if(verifieMatrice_NonVide())
+           {
+               if(d_graphe.getA_Des_Poids())
+               {
+                   int n = d_graphe.getMatAdj()[0][0];
+                   int m = d_graphe.getMatAdj()[0][1];
+                   vector<vector<int>> couts = d_graphe.getCouts();
+                   if(couts[0][0] != n || couts[0][1] != m)
+                   {
+                       std::cerr<<"ERREUR DANTZIG: Les elements presents dans le cout en ligne 0 ne correspondent pas avec la matrice"<<endl;
+                       return false;//Les elements presents dans le cout ne correspondent pas avec la matrice
+                   }
+                   return true;
+               }
+               else
+               {
+                   std::cerr<<"ERREUR DANTZIG: Cout vide !"<<endl;
+                   return false; //Cout vide
+               }
+           }
+           else
+           {
+               std::cerr<<"ERREUR DANTZIG: Matrice vide !"<<endl;
+               return false; //Graphe Vide - Matrice
+           }
+        }
+    }
+    else
+    {
+        std::cerr<<"ERREUR DANTZIG: Graphe non oriente !"<<endl;
+        return false;
+    }
+}
+
+bool application::verifieKruskal()
+{
+    //Il faut que fs et aps soit initialisé ou la matrice ET que le graphe soit non oriente.
+    if(!d_graphe.getEst_oriente())
+    {
+        if(d_graphe.isUsingFsAndAps())
+        {
+            if(verifieFS_APS_NonVide())
+            {
+                return true;
+            }
+            else
+            {
+                std::cerr<<"ERREUR KRUSKAL: FS et APS vide !"<<endl;
+                return false;
+            }
+        }
+        else if(verifieMatrice_NonVide())
+        {
+            return true;
+        }
+        else
+        {
+            std::cerr<<"ERREUR KRUSKAL: Matrice vide !"<<endl;
+            return false;
+        }
+    }
+    else
+    {
+        std::cerr<<"ERREUR KRUSKAL: Graphe oriente !"<<endl;
+        return false;
+    }
+}
+
+
 bool application::verifiePruferEncode()
 {
     //Il faut que fs et aps soit initialisé ou la matrice ET que le graphe soit non oriente.
@@ -579,6 +715,36 @@ void application::englobe_Dijkstra(int sommet_depart, vector<int>& d, vector<int
     }
     dijkstra di;
     di.faitDijkstra(d_graphe.getFS(),d_graphe.getAPS(),d_graphe.getCouts(),sommet_depart,d,pr);
+}
+
+bool application::englobe_Dantzig()
+{
+    vector<vector<int>> c = d_graphe.getCouts();
+    Dantzig da;
+    if(da.AlgoDantzig(c))
+    {
+        d_graphe.setCout(c);
+        return true;
+    }
+    else
+    {
+        std::cerr<<"Erreur DANTZIG : presence d'un circuit absorbant"<<endl;
+        return false;
+    }
+}
+
+
+void application::englobe_Kruskal()
+{
+    Graph t;
+    if(!d_graphe.isUsingFsAndAps())
+    {
+        transformeVersFS_APS();
+    }
+    Kruskal kr;
+    kr.AlgoKruskal(d_graphe,d_graphe);
+
+    d_graphe = t;
 }
 
 vector<int> application::englobe_Prufer_encode()
