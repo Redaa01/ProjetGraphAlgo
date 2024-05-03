@@ -255,6 +255,47 @@ void application::algorithmes()
         }
         break;
     }
+    case 2:
+    {
+        vector<int> rang;
+        if(verifieRang())
+        {
+            rang = englobe_Rang();
+            string s = "";
+            s += toStringVector(rang);
+            cout<<"Resultat du rang :"<<s<<endl;
+        }
+        break;
+    }
+    case 3:
+    {
+        if(verifieTarjan())
+        {
+            vector<int> cfc, prem, pred, pilch, baseR, baseI;
+            englobe_Tarjan(cfc,pilch,pred,prem,baseR,baseI);
+            string s = "";
+            s += "cfc : ";
+            s += toStringVector(cfc);
+            s += "\n";
+            s += "prem : ";
+            s += toStringVector(prem);
+            s += "\n";
+            s += "pilch : ";
+            s += toStringVector(pilch);
+            s += "\n";
+            s += "pred : ";
+            s += toStringVector(pred);
+            s += "\n";
+            s += "base reduite du graphe reduit : ";
+            s += toStringVector(baseR);
+            s += "\n";
+            s += "base initiale du graphe : ";
+            s += toStringVector(baseI);
+            s += "\n";
+            cout<<"Resultat de Tarjan :"<<s<<endl;
+        }
+        break;
+    }
         case 4:
     {
             vector<int> long_critique;
@@ -413,6 +454,70 @@ bool application::verifieDistance()
     else
     {
         std::cout<<"ERREUR DISTANCE: Graphe non oriente !"<<endl;
+        return false;
+    }
+}
+
+bool application::verifieRang()
+{
+    //Il faut que fs et aps soit initialisé ou la matrice ET que le graphe soit oriente.
+    if(d_graphe.getEst_oriente())
+    {
+        if(d_graphe.isUsingFsAndAps())
+        {
+            if(verifieFS_APS_NonVide())
+                return true;
+            else
+            {
+                std::cerr<<"ERREUR RANG: FS et APS vide !"<<endl;
+                return false;
+            }
+        }
+        else if(verifieMatrice_NonVide())
+        {
+            return true;
+        }
+        else
+        {
+            std::cerr<<"ERREUR RANG: Matrice vide !"<<endl;
+            return false;
+        }
+    }
+    else
+    {
+        std::cerr<<"ERREUR RANG: Graphe non oriente !"<<endl;
+        return false;
+    }
+}
+
+bool application::verifieTarjan()
+{
+    //Il faut que fs et aps soit initialisé ou la matrice.
+    if(d_graphe.getEst_oriente())
+    {
+        if(d_graphe.isUsingFsAndAps())
+        {
+            if(verifieFS_APS_NonVide())
+                return true;
+            else
+            {
+                std::cerr<<"ERREUR TARJAN: FS et APS vide !"<<endl;
+                return false;
+            }
+        }
+        else if(verifieMatrice_NonVide())
+        {
+            return true;
+        }
+        else
+        {
+            std::cerr<<"ERREUR TARJAN: Matrice vide !"<<endl;
+            return false;
+        }
+    }
+    else
+    {
+        std::cerr<<"ERREUR TARJAN: Graphe non oriente !"<<endl;
         return false;
     }
 }
@@ -726,6 +831,60 @@ vector<vector<int>> application::englobe_Distance()
     d.mat_distance(d_graphe.getFS(),d_graphe.getAPS(),matriceDistance);
     return matriceDistance;
 }
+
+vector<int> application::englobe_Rang()
+{
+    vector<int> rg;
+    if(!d_graphe.isUsingFsAndAps())
+    {
+        transformeVersFS_APS();
+    }
+    Rang ran;
+    ran.calculeRang(rg,d_graphe.getFS(),d_graphe.getAPS());
+    return rg;
+}
+
+void application::englobe_Tarjan(vector<int>& cfc, vector<int>& pilch, vector<int>& pred, vector<int>& prem, vector<int>& base, vector<int>& baseInitiale)
+{
+    if(!d_graphe.isUsingFsAndAps())
+    {
+        transformeVersFS_APS();
+    }
+    tarjan tarj;
+    tarj.fortconnexe(d_graphe.getFS(),d_graphe.getAPS(),cfc,pilch,pred,prem);
+
+    //traitement du resultat
+    vector<vector<int>> mat;
+    tarj.versGrapheReduit(cfc,prem,d_graphe.getFS(),d_graphe.getAPS(),mat);
+
+    //Nouveau graphe (Reduit)
+    Graph g_reduit{mat};
+
+    //determination de la base du graphe reduit :
+    vector<int> fs, aps;
+    g_reduit.matAdj_to_FS_APS(fs,aps);
+    g_reduit.setFSandAPS(fs,aps);
+
+
+    cout<<"--------------------------------"<<endl;
+    printVector(d_graphe.getFS());
+    printVector(d_graphe.getAPS());
+
+
+    tarj.base_Greduit(fs,aps,base);
+
+    cout<<"--------------------------------"<<endl;
+    printVector(base);
+
+
+    //determination de la base du graphe initial :
+    tarj.edition_bases(prem,pilch,base,baseInitiale);
+
+    cout<<"--------------------------------"<<endl;
+    printVector(baseInitiale);
+}
+
+
 
 void application::englobe_Ordonnancement(const vector<int>& duree_taches, const vector<int>& fp, const vector<int>& app, vector<int>& longueur_critique)
 {

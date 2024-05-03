@@ -57,6 +57,8 @@
 		<Unit filename="prufer.h" />
 		<Unit filename="rang.cpp" />
 		<Unit filename="rang.h" />
+		<Unit filename="tarjan.cpp" />
+		<Unit filename="tarjan.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

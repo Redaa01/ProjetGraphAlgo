@@ -61,14 +61,14 @@
 	<sstream>
 	<vector>
 
-1714725924 source:c:\users\mathi\desktop\projet final\projetgraphalgo\main.cpp
+1714769227 source:c:\users\mathi\desktop\projet final\projetgraphalgo\main.cpp
 	<iostream>
 	"distance.h"
 	<vector>
 	"application.h"
-	"kruskal.h"
+	"rang.h"
 
-1714728973 c:\users\mathi\desktop\projet final\projetgraphalgo\application.h
+1714769687 c:\users\mathi\desktop\projet final\projetgraphalgo\application.h
 	"Graph.h"
 	"distance.h"
 	"dijkstra.h"
@@ -76,6 +76,8 @@
 	"prufer.h"
 	"dantzig.h"
 	"ordonnancement.h"
+	"rang.h"
+	"tarjan.h"
 	<iostream>
 	<vector>
 
@@ -87,7 +89,7 @@
 	<string>
 	<vector>
 
-1714727951 source:c:\users\mathi\desktop\projet final\projetgraphalgo\application.cpp
+1714769196 source:c:\users\mathi\desktop\projet final\projetgraphalgo\application.cpp
 	"application.h"
 
 1714403184 source:c:\users\mathi\desktop\projet final\projetgraphalgo\prufer.cpp
@@ -176,7 +178,7 @@
 1714761693 c:\users\zk\desktop\projetgraphalgo\kruskal.h
 	"graph.h"
 
-1714726083 source:c:\users\mathi\desktop\projet final\projetgraphalgo\dantzig.cpp
+1714768924 source:c:\users\mathi\desktop\projet final\projetgraphalgo\dantzig.cpp
 	"dantzig.h"
 
 1714726274 c:\users\mathi\desktop\projet final\projetgraphalgo\dantzig.h
@@ -205,4 +207,17 @@
 1714768372 c:\users\zk\desktop\projetgraphalgo\rang.h
 	<vector>
 	<string>
+
+1714768675 c:\users\mathi\desktop\projet final\projetgraphalgo\rang.h
+	<vector>
+	<string>
+
+1714768675 source:c:\users\mathi\desktop\projet final\projetgraphalgo\rang.cpp
+	"rang.h"
+
+1714769938 source:c:\users\mathi\desktop\projet final\projetgraphalgo\tarjan.cpp
+	"tarjan.h"
+
+1714769942 c:\users\mathi\desktop\projet final\projetgraphalgo\tarjan.h
+	<vector>
 
