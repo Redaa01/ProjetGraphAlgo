@@ -96,80 +96,84 @@
 1714403209 c:\users\mathi\desktop\projet final\projetgraphalgo\prufer.h
 	<vector>
 
-1714524146 source:c:\users\zk\desktop\projetgraphalgo\application.cpp
+1714761693 source:c:\users\zk\desktop\projetgraphalgo\application.cpp
 	"application.h"
 
-1714524146 c:\users\zk\desktop\projetgraphalgo\application.h
-	<vector>
+1714761693 c:\users\zk\desktop\projetgraphalgo\application.h
 	"Graph.h"
 	"distance.h"
 	"dijkstra.h"
+	"kruskal.h"
 	"prufer.h"
+	"dantzig.h"
+	"ordonnancement.h"
 	<iostream>
+	<vector>
 
-1714532423 c:\users\zk\desktop\projetgraphalgo\graph.h
+1714761693 c:\users\zk\desktop\projetgraphalgo\graph.h
 	"noeud.h"
 	<memory>
 	<sstream>
 	<vector>
 
-1714524146 c:\users\zk\desktop\projetgraphalgo\noeud.h
+1714761693 c:\users\zk\desktop\projetgraphalgo\noeud.h
 	<iostream>
 	<string>
 	<vector>
 
-1714524146 c:\users\zk\desktop\projetgraphalgo\distance.h
+1714761693 c:\users\zk\desktop\projetgraphalgo\distance.h
 	<vector>
 	<iostream>
 
-1714524146 c:\users\zk\desktop\projetgraphalgo\dijkstra.h
+1714761693 c:\users\zk\desktop\projetgraphalgo\dijkstra.h
 	<vector>
 
-1714524146 c:\users\zk\desktop\projetgraphalgo\prufer.h
+1714761693 c:\users\zk\desktop\projetgraphalgo\prufer.h
 	<vector>
 
-1714524146 source:c:\users\zk\desktop\projetgraphalgo\dijkstra.cpp
+1714761693 source:c:\users\zk\desktop\projetgraphalgo\dijkstra.cpp
 	"dijkstra.h"
 
-1714524146 source:c:\users\zk\desktop\projetgraphalgo\distance.cpp
+1714761693 source:c:\users\zk\desktop\projetgraphalgo\distance.cpp
 	"distance.h"
 
-1714529419 source:c:\users\zk\desktop\projetgraphalgo\graph.cpp
+1714761693 source:c:\users\zk\desktop\projetgraphalgo\graph.cpp
 	"graph.h"
 
-1714533001 source:c:\users\zk\desktop\projetgraphalgo\main.cpp
+1714766138 source:c:\users\zk\desktop\projetgraphalgo\main.cpp
 	<iostream>
 	"distance.h"
 	<vector>
 	"application.h"
-	"kruskal.h"
+	"rang.h"
 
-1714524146 source:c:\users\zk\desktop\projetgraphalgo\noeud.cpp
+1714761693 source:c:\users\zk\desktop\projetgraphalgo\noeud.cpp
 	"noeud.h"
 
-1714524146 source:c:\users\zk\desktop\projetgraphalgo\prufer.cpp
+1714761693 source:c:\users\zk\desktop\projetgraphalgo\prufer.cpp
 	"prufer.h"
 
-1714525339 source:c:\users\zk\desktop\projetgraphalgo\dantzig.cpp
+1714761693 source:c:\users\zk\desktop\projetgraphalgo\dantzig.cpp
 	"dantzig.h"
 
-1714525273 c:\users\zk\desktop\projetgraphalgo\dantzig.h
+1714761693 c:\users\zk\desktop\projetgraphalgo\dantzig.h
 	<vector>
+	<iostream>
 
-1714529518 source:c:\users\zk\desktop\projetgraphalgo\ordonnancement.cpp
+1714761693 source:c:\users\zk\desktop\projetgraphalgo\ordonnancement.cpp
 	"ordonnancement.h"
 	<algorithm>
 
-1714527753 c:\users\zk\desktop\projetgraphalgo\ordonnancement.h
+1714761693 c:\users\zk\desktop\projetgraphalgo\ordonnancement.h
 	<vector>
 	<string>
 	"graph.h"
 
-1714532358 source:c:\users\zk\desktop\projetgraphalgo\kruskal.cpp
+1714761693 source:c:\users\zk\desktop\projetgraphalgo\kruskal.cpp
 	"kruskal.h"
 	<iostream>
 
-1714532624 c:\users\zk\desktop\projetgraphalgo\kruskal.h
+1714761693 c:\users\zk\desktop\projetgraphalgo\kruskal.h
 	"graph.h"
 
 1714726083 source:c:\users\mathi\desktop\projet final\projetgraphalgo\dantzig.cpp
@@ -194,4 +198,13 @@
 	<vector>
 	<string>
 	"graph.h"
+
+1714766025 source:c:\users\zk\desktop\projetgraphalgo\rang.cpp
+	"rang.h"
+
+1714766025 c:\users\zk\desktop\projetgraphalgo\rang.h
+	<iostream>
+	<vector>
+	<fstream>
+	<string>
 
